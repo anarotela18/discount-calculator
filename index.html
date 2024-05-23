@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-6 mx-auto">
+                <h1 class="text-center my-5 text-primary">Discount Calculator</h1>
+                <form class="card card-body shadow">
+                    <label for="originalPrice">Original Price:</label>
+                    <input type="number" id="originalPrice" min="0" step="1" required class="form-control mb-3"/>
+                    
+                    <label for="discountPercentage">Discount Percentage:</label>
+                    <input type="number" id="discountPercentage" min="0" ma="100" step="1" required class="form-control mb-3"/>
+                    
+                    <button class="btn btn-outline-primary btn-lg" type="button" onclick="calculateAndDisplayDiscount()"> Calcute</button>
+                    
+                </form>
+            
+                <h2 class="mt-3">Results:</h2>
+                <p id="result"></p>
+            <div>
+        </div>  
+    </div>
+    <script>
+        function calculateDiscountedPrice (price, discountPercentage){
+            const discount = (price * discountPercentage) / 100;
+            const priceWidthDiscount = price - discount;
+            return priceWidthDiscount;
+        }
+
+        function calculateAndDisplayDiscount (){
+            const originalPrice = parseInt(document.getElementById('originalPrice').value);
+            const discountPercentage = parseInt(document.getElementById('discountPercentage').value);
+
+            if(isNaN(originalPrice) || isNaN(discountPercentage)){
+                document.getElementById('result').innerText = 'Please enter valid values';
+                return;
+            }
+
+            const finalPrice = calculateDiscountedPrice (originalPrice, discountPercentage);
+
+            document.getElementById('result').innerText = 
+            'Original Price: $' + originalPrice + '\n' +
+            'Discount Percentage: $' + discountPercentage + '\n' +
+            'Final Price: $' + finalPrice;
+
+        }
+    </script>
+</body>
+</html>
